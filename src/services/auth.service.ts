@@ -31,4 +31,10 @@ export const isLoggedIn = () => {
   return !!authToken;
 };
 
+// Local storage theke user remove er functionality (Logout)
+export const removeUserInfo = (key: string) => {
+  // local storage theke kichu remove korte hole nicher kaj tuku execute hobe
+  return localStorage.removeItem(key);
+};
+
 // authKey = accessToken
