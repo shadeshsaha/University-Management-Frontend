@@ -7,5 +7,15 @@ export const setToLocalStorage = (key: string, token: string) => {
   }
 
   // access token thakle
-  localStorage.setItem(key, token);
+  return localStorage.setItem(key, token);
+};
+
+export const getFromLocalStorage = (key: string) => {
+  // validate access token otherwise server will crash
+  if (!key || typeof window === "undefined") {
+    return "";
+  }
+
+  // access token thakle
+  return localStorage.getItem(key);
 };
