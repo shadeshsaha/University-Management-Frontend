@@ -3,9 +3,10 @@
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { isLoggedIn, storeUserInfo } from "@/services/auth.service";
+import { storeUserInfo } from "@/services/auth.service";
 import { Button, Col, Row } from "antd";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
 import loginImage from "../../assests/login-image.png";
 
@@ -18,12 +19,19 @@ const LoginPage = () => {
   // console.log("getUserInfo(): ", getUserInfo());
 
   const [userLogin] = useUserLoginMutation();
-  console.log("isLoggedIn: ", isLoggedIn());
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       // console.log("data: ", data);
       const res = await userLogin({ ...data }).unwrap(); // using unwarp it provides actual data.
       // console.log("res: ", res);
+
+      // accessToken thakle profile page a niye jabe
+      if (res?.data?.accessToken) {
+        router.push("/profile");
+      }
+
       storeUserInfo({ accessToken: res?.data?.accessToken });
     } catch (error) {
       console.error("error: ", error);
