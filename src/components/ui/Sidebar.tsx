@@ -12,7 +12,7 @@ const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
   // const role = USER_ROLE.ADMIN;
   const { role } = getUserInfo() as any;
-  console.log("role: ", role);
+  // console.log("role: ", role);
 
   return (
     <Sider
@@ -36,8 +36,9 @@ const SideBar = () => {
           fontSize: collapsed ? "0.8rem" : "2rem",
           textAlign: "center",
           fontWeight: "bold",
-          marginTop: "1rem",
-          marginBottom: "1rem",
+          // marginTop: "1rem",
+          marginBottom: "0.5rem",
+          padding: "10px 0px",
         }}
       >
         Daffodil International University (DIU)
