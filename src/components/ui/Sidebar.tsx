@@ -19,7 +19,7 @@ const SideBar = () => {
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
-      width={380}
+      width={300}
       style={{
         overflow: "auto",
         height: "100vh",
