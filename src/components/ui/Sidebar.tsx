@@ -32,9 +32,11 @@ const SideBar = () => {
       <div
         style={{
           color: "white",
-          fontSize: "2rem",
+          // fontSize: "2rem",
+          fontSize: collapsed ? "0.8rem" : "2rem",
           textAlign: "center",
           fontWeight: "bold",
+          marginTop: "1rem",
           marginBottom: "1rem",
         }}
       >
