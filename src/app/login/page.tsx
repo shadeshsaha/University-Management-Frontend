@@ -25,14 +25,14 @@ const LoginPage = () => {
     try {
       // console.log("data: ", data);
       const res = await userLogin({ ...data }).unwrap(); // using unwarp it provides actual data.
-      // console.log("res: ", res);
+      console.log("res: ", res);
 
       // accessToken thakle profile page a niye jabe
-      if (res?.data?.accessToken) {
+      if (res?.accessToken) {
         router.push("/profile");
       }
 
-      storeUserInfo({ accessToken: res?.data?.accessToken });
+      storeUserInfo({ accessToken: res?.accessToken });
     } catch (error) {
       console.error("error: ", error);
     }
