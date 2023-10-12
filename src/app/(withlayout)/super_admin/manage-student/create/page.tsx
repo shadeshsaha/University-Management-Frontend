@@ -1,6 +1,7 @@
 "use client";
 
 import StepperForm from "@/components/StepperForm/StepperForm";
+import GuardianInfo from "@/components/StudentForms/GuardianInfo";
 import StudentBasicInfo from "@/components/StudentForms/StudentBasicInfo";
 import StudentInfo from "@/components/StudentForms/StudentInfo";
 
@@ -16,7 +17,7 @@ const CreateStudentPage = () => {
     },
     {
       title: "Guardian Information",
-      content: "Last-content",
+      content: <GuardianInfo />,
     },
     {
       title: "Local Guardian Information",
