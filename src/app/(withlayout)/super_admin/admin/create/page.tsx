@@ -1,6 +1,7 @@
 "use client";
 
 import Form from "@/components/Forms/Form";
+import FormDatePicker from "@/components/Forms/FormDatePicker";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import FormTextArea from "@/components/Forms/FormTextArea";
@@ -240,7 +241,8 @@ const CreateAdminPage = () => {
               </Col>
               {/* Emergency Contact No. End */}
 
-              {/* <Col
+              {/* Date Of Birth Start */}
+              <Col
                 className="gutter-row"
                 span={8}
                 style={{
@@ -249,10 +251,11 @@ const CreateAdminPage = () => {
               >
                 <FormDatePicker
                   name="admin.dateOfBirth"
-                  label="Date of birth"
+                  label="Date Of Birth"
                   size="large"
                 />
-              </Col> */}
+              </Col>
+              {/* Date Of Birth End */}
 
               {/* Blood Group Start */}
               <Col
