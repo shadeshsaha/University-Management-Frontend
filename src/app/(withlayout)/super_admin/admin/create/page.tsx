@@ -3,9 +3,14 @@
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
+import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UploadImage from "@/components/ui/UploadImage";
-import { departmentOptions, genderOptions } from "@/constants/global";
+import {
+  bloodGroupOptions,
+  departmentOptions,
+  genderOptions,
+} from "@/constants/global";
 import { Button, Col, Row } from "antd";
 
 const CreateAdminPage = () => {
@@ -167,7 +172,7 @@ const CreateAdminPage = () => {
           </div>
 
           {/* Basic Information Start */}
-          {/* <div
+          <div
             style={{
               border: "1px solid #d9d9d9",
               borderRadius: "5px",
@@ -184,6 +189,7 @@ const CreateAdminPage = () => {
               Basic Information
             </p>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+              {/* Email Address Start */}
               <Col
                 className="gutter-row"
                 span={8}
@@ -195,9 +201,12 @@ const CreateAdminPage = () => {
                   type="email"
                   name="admin.email"
                   size="large"
-                  label="Email address"
+                  label="Email Address"
                 />
               </Col>
+              {/* Email Address End */}
+
+              {/* Contact No. Start */}
               <Col
                 className="gutter-row"
                 span={8}
@@ -212,6 +221,9 @@ const CreateAdminPage = () => {
                   label="Contact No."
                 />
               </Col>
+              {/* Contact No. End */}
+
+              {/* Emergency Contact No. Start */}
               <Col
                 className="gutter-row"
                 span={8}
@@ -226,7 +238,9 @@ const CreateAdminPage = () => {
                   label="Emergency Contact No."
                 />
               </Col>
-              <Col
+              {/* Emergency Contact No. End */}
+
+              {/* <Col
                 className="gutter-row"
                 span={8}
                 style={{
@@ -238,7 +252,9 @@ const CreateAdminPage = () => {
                   label="Date of birth"
                   size="large"
                 />
-              </Col>
+              </Col> */}
+
+              {/* Blood Group Start */}
               <Col
                 className="gutter-row"
                 span={8}
@@ -250,10 +266,13 @@ const CreateAdminPage = () => {
                   size="large"
                   name="admin.bloodGroup"
                   options={bloodGroupOptions}
-                  label="Blood group"
+                  label="Blood Group"
                   placeholder="Select"
                 />
               </Col>
+              {/* Blood Group End */}
+
+              {/* Designation Start */}
               <Col
                 className="gutter-row"
                 span={8}
@@ -268,23 +287,29 @@ const CreateAdminPage = () => {
                   label="Designation"
                 />
               </Col>
+              {/* Designation End */}
+
+              {/* Present Address Start */}
               <Col span={12} style={{ margin: "10px 0" }}>
                 <FormTextArea
                   name="admin.presentAddress"
-                  label="Present address"
+                  label="Present Address"
                   rows={4}
                 />
               </Col>
+              {/* Present Address End */}
 
+              {/* Permanent Address Start */}
               <Col span={12} style={{ margin: "10px 0" }}>
                 <FormTextArea
                   name="admin.permanentAddress"
-                  label="Permanent address"
+                  label="Permanent Address"
                   rows={4}
                 />
               </Col>
+              {/* Permanent Address End */}
             </Row>
-          </div> */}
+          </div>
           {/* Basic Information End */}
 
           <Button htmlType="submit" type="primary">
