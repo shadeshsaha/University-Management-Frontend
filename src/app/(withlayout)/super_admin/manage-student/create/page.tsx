@@ -1,6 +1,7 @@
 "use client";
 
 import StepperForm from "@/components/StepperForm/StepperForm";
+import StudentBasicInfo from "@/components/StudentForms/StudentBasicInfo";
 import StudentInfo from "@/components/StudentForms/StudentInfo";
 
 const CreateStudentPage = () => {
@@ -11,7 +12,7 @@ const CreateStudentPage = () => {
     },
     {
       title: "Basic Information",
-      content: "Second-content",
+      content: <StudentBasicInfo />,
     },
     {
       title: "Guardian Information",
