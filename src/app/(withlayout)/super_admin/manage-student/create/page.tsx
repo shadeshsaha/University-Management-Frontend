@@ -1,3 +1,5 @@
+"use client";
+
 import StepperForm from "@/components/StepperForm/StepperForm";
 import StudentInfo from "@/components/StudentForms/StudentInfo";
 
