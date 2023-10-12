@@ -4,7 +4,7 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { genderOptions } from "@/constants/global";
+import { departmentOptions, genderOptions } from "@/constants/global";
 import { Button, Col, Row } from "antd";
 
 const CreateAdminPage = () => {
@@ -133,7 +133,8 @@ const CreateAdminPage = () => {
               </Col>
               {/* Gender End */}
 
-              {/* <Col
+              {/* Department Start */}
+              <Col
                 className="gutter-row"
                 span={8}
                 style={{
@@ -148,7 +149,9 @@ const CreateAdminPage = () => {
                   placeholder="Select"
                 />
               </Col>
-              <Col
+              {/* Department End */}
+
+              {/* <Col
                 className="gutter-row"
                 span={8}
                 style={{
