@@ -4,6 +4,7 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
+import UploadImage from "@/components/ui/UploadImage";
 import { departmentOptions, genderOptions } from "@/constants/global";
 import { Button, Col, Row } from "antd";
 
@@ -151,7 +152,8 @@ const CreateAdminPage = () => {
               </Col>
               {/* Department End */}
 
-              {/* <Col
+              {/* Image Upload Start */}
+              <Col
                 className="gutter-row"
                 span={8}
                 style={{
@@ -159,11 +161,12 @@ const CreateAdminPage = () => {
                 }}
               >
                 <UploadImage />
-              </Col> */}
+              </Col>
+              {/* Image Upload End */}
             </Row>
           </div>
 
-          {/* basic info */}
+          {/* Basic Information Start */}
           {/* <div
             style={{
               border: "1px solid #d9d9d9",
@@ -282,6 +285,8 @@ const CreateAdminPage = () => {
               </Col>
             </Row>
           </div> */}
+          {/* Basic Information End */}
+
           <Button htmlType="submit" type="primary">
             Create
           </Button>
