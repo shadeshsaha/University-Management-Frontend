@@ -2,6 +2,7 @@
 
 import { Button, message, Steps, theme } from "antd";
 import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 
 interface ISteps {
   title?: string;
@@ -28,30 +29,37 @@ const StepperForm = ({ steps }: IStepsProps) => {
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
+  const methods = useForm();
+
   return (
     <>
       <Steps current={current} items={items} />
-      <div>{steps[current].content}</div>
-      <div style={{ marginTop: 24 }}>
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
-            Next
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success("Processing complete!")}
-          >
-            Done
-          </Button>
-        )}
-        {current > 0 && (
-          <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-            Previous
-          </Button>
-        )}
-      </div>
+      <FormProvider {...methods}>
+        <form>
+          <div>{steps[current].content}</div>
+          <div style={{ marginTop: 24 }}>
+            {current < steps.length - 1 && (
+              <Button type="primary" onClick={() => next()}>
+                Next
+              </Button>
+            )}
+            {current === steps.length - 1 && (
+              <Button
+                type="primary"
+                htmlType="submit"
+                onClick={() => message.success("Processing complete!")}
+              >
+                Done
+              </Button>
+            )}
+            {current > 0 && (
+              <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+                Previous
+              </Button>
+            )}
+          </div>
+        </form>
+      </FormProvider>
     </>
   );
 };
