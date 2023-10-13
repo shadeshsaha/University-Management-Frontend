@@ -1,7 +1,9 @@
 "use client";
 
-import { Button, message, Steps, theme } from "antd";
-import { useState } from "react";
+import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
+import { Button, Steps, message } from "antd";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface ISteps {
@@ -15,9 +17,19 @@ interface IStepsProps {
   navigateLink?: string;
 }
 
-const StepperForm = ({ steps, submitHandler }: IStepsProps) => {
-  const { token } = theme.useToken();
-  const [current, setCurrent] = useState(0);
+const StepperForm = ({ steps, submitHandler, navigateLink }: IStepsProps) => {
+  const router = useRouter();
+  const [current, setCurrent] = useState<number>(
+    // er moddhe local storage er kach theke state name er kono key local storage er moddhe set kora ache kina r tar moddhe kono value ache kina
+    !!getFromLocalStorage("step")
+      ? Number(JSON.parse(getFromLocalStorage("step") as string).step)
+      : 0
+  );
+
+  // in local storage, set "step"
+  useEffect(() => {
+    setToLocalStorage("step", JSON.stringify({ step: current }));
+  }, [current]);
 
   const next = () => {
     setCurrent(current + 1);
@@ -35,6 +47,8 @@ const StepperForm = ({ steps, submitHandler }: IStepsProps) => {
   const handleStudentOnSubmit = (data: any) => {
     submitHandler(data);
     reset();
+    setToLocalStorage("step", JSON.stringify({ step: 0 }));
+    navigateLink && router.push(navigateLink); // using && means, navigateLink thakle push kore dibe
   };
 
   return (
