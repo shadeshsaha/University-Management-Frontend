@@ -1,9 +1,11 @@
 // Injecting & exporting additional endpoints
 
+import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
 const AUTH_URL = "/auth";
 
+// authApi is for Login.
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     // eta ekta hook create kore dibe. er maddhome user login korbe
@@ -13,7 +15,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         data: loginData,
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: [tagTypes.user],
     }),
   }),
 });
