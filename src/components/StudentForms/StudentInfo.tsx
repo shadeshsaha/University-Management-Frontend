@@ -36,6 +36,7 @@ const StudentInfo = () => {
             label="First Name"
           />
         </Col>
+
         <Col
           className="gutter-row"
           span={6}
@@ -50,6 +51,7 @@ const StudentInfo = () => {
             label="Middle Name"
           />
         </Col>
+
         <Col
           className="gutter-row"
           span={6}
@@ -64,6 +66,7 @@ const StudentInfo = () => {
             label="Last Name"
           />
         </Col>
+
         <Col
           className="gutter-row"
           span={6}
@@ -78,6 +81,7 @@ const StudentInfo = () => {
             label="Password"
           />
         </Col>
+
         <Col
           className="gutter-row"
           span={8}
@@ -93,6 +97,7 @@ const StudentInfo = () => {
             placeholder="Select"
           />
         </Col>
+
         <Col
           className="gutter-row"
           span={8}
@@ -108,6 +113,7 @@ const StudentInfo = () => {
             placeholder="Select"
           />
         </Col>
+
         <Col
           className="gutter-row"
           span={8}
@@ -123,6 +129,7 @@ const StudentInfo = () => {
             placeholder="Select"
           />
         </Col>
+
         <Col
           className="gutter-row"
           span={8}
@@ -138,6 +145,7 @@ const StudentInfo = () => {
             placeholder="Select"
           />
         </Col>
+
         <Col
           className="gutter-row"
           span={8}
