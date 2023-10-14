@@ -12,7 +12,7 @@ export const axiosBaseQuery =
       method: AxiosRequestConfig["method"];
       data?: AxiosRequestConfig["data"];
       params?: AxiosRequestConfig["params"];
-      headers?: AxiosRequestConfig["headers"];
+      // headers?: AxiosRequestConfig["headers"];
       meta?: IMeta;
       contentType?: string;
     },
@@ -30,7 +30,8 @@ export const axiosBaseQuery =
           contentType: contentType || "application/json",
         },
       });
-      return { data: result.data };
+      return result;
+      // return { data: result.data };
     } catch (axiosError) {
       const err = axiosError as AxiosError;
       return {

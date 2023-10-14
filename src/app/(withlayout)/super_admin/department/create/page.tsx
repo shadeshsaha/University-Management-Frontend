@@ -9,6 +9,7 @@ import { Button, Col, Row, message } from "antd";
 const CreateDepartmentPage = () => {
   // "redux/api/departmentApi" theke "useAddDepartmentMutation" call korar por, ei function ta ekta array er moddhe arekta function "addDepartment" function k "useAddDepartmentMutation" theke receive korbe.
   const [addDepartment] = useAddDepartmentMutation();
+
   const onSubmit = async (data: any) => {
     message.loading("Creating Department...");
     try {
