@@ -29,7 +29,8 @@ export const departmentApi = baseApi.injectEndpoints({
     // eta ekta hook create kore dibe. er maddhome department create korbe.
     addDepartment: build.mutation({
       query: (data) => ({
-        url: `${DEPARTMENT_URL}/create-department`,
+        // url: `${DEPARTMENT_URL}/create-department`,
+        url: DEPARTMENT_URL,
         method: "POST",
         data,
       }),

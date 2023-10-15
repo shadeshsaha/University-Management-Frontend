@@ -17,7 +17,7 @@ const CreateDepartmentPage = () => {
       await addDepartment(data);
       message.success("Department added successfully!");
     } catch (err: any) {
-      console.error(err.message);
+      console.error("err.message: ", err.message);
       message.error(err.message);
     }
   };
