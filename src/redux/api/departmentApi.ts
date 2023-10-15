@@ -58,17 +58,27 @@ export const departmentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.department],
     }),
+
+    // delete single department by id
+    deleteDepartment: build.mutation({
+      query: (id) => ({
+        url: `${DEPARTMENT_URL}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.department],
+    }),
   }),
 });
 // ekhanei DEPARTMENT API er kaj sesh. erpor rootReducer a jeye connect korte hobe.
 
 export const {
-  useDepartmentsQuery,
-  useAddDepartmentMutation,
+  useDepartmentsQuery, // get all departments
+  useAddDepartmentMutation, // Create A Department
   useDepartmentQuery, // get single department hooks
   useUpdateDepartmentMutation, // update single department hooks
+  useDeleteDepartmentMutation, // delete single department hooks
 } = departmentApi;
 
-// RTK Query er khetre POST(POST/PUT/PATCH) method hole, "mutation" korte hoy(line-11)
+// RTK Query er khetre "POST/PUT/PATCH/DELETE" method hole, "mutation" korte hoy(line-32, 53, 63)
 
 // useAddDepartmentMutation k "super_admin/department/create/page.tsx" er moddhe call korte hobe. (Same baki gulor jonnow)

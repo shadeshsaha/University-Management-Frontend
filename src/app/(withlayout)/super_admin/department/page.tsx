@@ -1,16 +1,20 @@
 "use client";
 
 import ActionBar from "@/components/ui/ActionBar";
+import DeleteModal from "@/components/ui/DeleteModal";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UMTable from "@/components/ui/UMTable";
-import { useDepartmentsQuery } from "@/redux/api/departmentApi";
+import {
+  useDeleteDepartmentMutation,
+  useDepartmentsQuery,
+} from "@/redux/api/departmentApi";
 import { useDebounced } from "@/redux/hooks";
 import {
   DeleteOutlined,
   EditOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { useState } from "react";
@@ -23,6 +27,9 @@ const ManageDepartmentPage = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
+  const [deleteDepartment] = useDeleteDepartmentMutation();
 
   // query er value hishebe set kora hoise ekhane.
   query["limit"] = size;
@@ -45,6 +52,33 @@ const ManageDepartmentPage = () => {
   const departments = data?.departments;
   const meta = data?.meta;
   // console.log("departments: ", departments, "meta: ", meta);
+
+  const deleteHandler = async (id: string) => {
+    message.loading("Deleting.....");
+    try {
+      //   console.log(data);
+      await deleteDepartment(id);
+      message.success("Department Deleted successfully");
+    } catch (err: any) {
+      //   console.error(err.message);
+      message.error(err.message);
+    }
+  };
+
+  // For Modal
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    deleteHandler(deleteId);
+    setIsModalOpen(false);
+    setDeleteId("");
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const columns = [
     {
@@ -73,8 +107,22 @@ const ManageDepartmentPage = () => {
                 <EditOutlined />
               </Button>
             </Link>
+            {/* <Button
+              onClick={() => {
+                // console.log("data: ", data)
+                deleteHandler(data?.id);
+              }}
+              type="primary"
+              danger
+            >
+              <DeleteOutlined />
+            </Button> */}
             <Button
-              onClick={() => console.log("data: ", data)}
+              style={{ margin: "0px 5px", padding: "0px 10px" }}
+              onClick={() => {
+                showModal();
+                setDeleteId(data?.id);
+              }}
               type="primary"
               danger
             >
@@ -159,6 +207,16 @@ const ManageDepartmentPage = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
+      />
+
+      {/* Delete confirmation modal  */}
+
+      <DeleteModal
+        title="Are you sure you want to delete this department ? "
+        subTitle="Remember once it will be deleted, you will never get it back. "
+        isModalOpen={isModalOpen}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
       />
     </div>
   );
