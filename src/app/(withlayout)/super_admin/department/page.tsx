@@ -8,10 +8,10 @@ import { useDebounced } from "@/redux/hooks";
 import {
   DeleteOutlined,
   EditOutlined,
-  EyeOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
 import { Button, Input } from "antd";
+import dayjs from "dayjs";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -54,6 +54,9 @@ const ManageDepartmentPage = () => {
     {
       title: "CreatedAt",
       dataIndex: "createdAt",
+      render: function (data: any) {
+        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+      },
       sorter: true,
     },
     {
@@ -61,9 +64,6 @@ const ManageDepartmentPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Button onClick={() => console.log("data: ", data)} type="primary">
-              <EyeOutlined />
-            </Button>
             <Button
               style={{ margin: "0px 5px" }}
               onClick={() => console.log("data: ", data)}
