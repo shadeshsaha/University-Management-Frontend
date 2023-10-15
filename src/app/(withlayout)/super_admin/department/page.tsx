@@ -64,13 +64,15 @@ const ManageDepartmentPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Button
-              style={{ margin: "0px 5px" }}
-              onClick={() => console.log("data: ", data)}
-              type="primary"
-            >
-              <EditOutlined />
-            </Button>
+            <Link href={`/super_admin/department/edit/${data?.id}`}>
+              <Button
+                style={{ margin: "0px 5px" }}
+                // onClick={() => console.log("data: ", data)}
+                type="primary"
+              >
+                <EditOutlined />
+              </Button>
+            </Link>
             <Button
               onClick={() => console.log("data: ", data)}
               type="primary"
@@ -116,6 +118,7 @@ const ManageDepartmentPage = () => {
           },
         ]}
       />
+
       <ActionBar title="Department List">
         <Input
           type="text"
