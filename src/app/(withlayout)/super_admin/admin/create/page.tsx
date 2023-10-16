@@ -8,15 +8,18 @@ import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UploadImage from "@/components/ui/UploadImage";
 import { bloodGroupOptions, genderOptions } from "@/constants/global";
+import { useAddAdminWithFormDataMutation } from "@/redux/api/adminApi";
 import { useDepartmentsQuery } from "@/redux/api/departmentApi";
 import { adminSchema } from "@/schemas/admin";
 import { IDepartment } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, message } from "antd";
 
 const CreateAdminPage = () => {
   // Showing created departments from "department/create".
   const { data, isLoading } = useDepartmentsQuery({ limit: 100, page: 1 });
+  const [addAdminWithFormData] = useAddAdminWithFormDataMutation(); // create admin
+
   // @ts-ignore
   const departments: IDepartment[] = data?.departments;
 
@@ -29,11 +32,24 @@ const CreateAdminPage = () => {
       };
     });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (values: any) => {
+    console.log("values: ", values);
+    const obj = { ...values }; // obj has 1. admin data, 2. image data, 3. password
+    const file = obj["file"]; // separated obj er vetor er file property
+    delete obj["file"]; // deleted obj theke file property
+    const data = JSON.stringify(obj); // now data has, 1. admin data, 2. password
+    console.log(data);
+    const formData = new FormData();
+    formData.append("file", file as Blob);
+    formData.append("data", data);
+    console.log("formData: ", formData);
+    message.loading("Creating...");
     try {
-      console.log("data: ", data);
-    } catch (error: any) {
-      console.error("error: ", error.message);
+      await addAdminWithFormData(formData);
+      console.log("formData: ", formData);
+      message.success("Admin created successfully!");
+    } catch (err: any) {
+      console.error(err.message);
     }
   };
 
