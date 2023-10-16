@@ -34,7 +34,41 @@ export const adminApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.admin],
     }),
+
+    // get single department by id
+    singleAdmin: build.query({
+      query: (id) => ({
+        url: `${ADMIN_URL}/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.admin],
+    }),
+
+    // update single admin by id
+    updateAdmin: build.mutation({
+      query: (data) => ({
+        url: `${ADMIN_URL}/${data.id}`,
+        method: "PATCH",
+        data: data.body,
+      }),
+      invalidatesTags: [tagTypes.admin],
+    }),
+
+    // delete single admin by id
+    deleteAdmin: build.mutation({
+      query: (id) => ({
+        url: `${ADMIN_URL}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.admin],
+    }),
   }),
 });
 
-export const { useAdminsQuery, useAddAdminWithFormDataMutation } = adminApi;
+export const {
+  useAdminsQuery,
+  useAddAdminWithFormDataMutation,
+  useSingleAdminQuery, // get single admin hooks
+  useUpdateAdminMutation, // update single admin hooks
+  useDeleteAdminMutation, // delete single admin hooks
+} = adminApi;

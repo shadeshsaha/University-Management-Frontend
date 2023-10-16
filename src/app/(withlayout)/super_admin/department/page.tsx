@@ -210,7 +210,6 @@ const ManageDepartmentPage = () => {
       />
 
       {/* Delete confirmation modal  */}
-
       <DeleteModal
         title="Are you sure you want to delete this department ? "
         subTitle="Remember once it will be deleted, you will never get it back. "
