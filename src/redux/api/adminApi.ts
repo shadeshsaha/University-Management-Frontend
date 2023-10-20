@@ -35,7 +35,7 @@ export const adminApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.admin],
     }),
 
-    // get single department by id
+    // get single admin by id
     singleAdmin: build.query({
       query: (id) => ({
         url: `${ADMIN_URL}/${id}`,
