@@ -87,3 +87,15 @@ export interface IAcademicDepartment {
   updatedAt: string;
   __v: number;
 }
+
+export interface IAcademicSemester {
+  id: string;
+  title: string;
+  year: number;
+  code: string;
+  startMonth: string;
+  endMonth: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
