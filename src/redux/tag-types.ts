@@ -3,6 +3,7 @@ export enum tagTypes {
   department = "department",
   faculty = "faculty",
   admin = "admin",
+  academicFaculty = "academic-faculty",
 }
 
 export const tagTypesList = [
@@ -10,4 +11,5 @@ export const tagTypesList = [
   tagTypes.department,
   tagTypes.faculty,
   tagTypes.admin,
+  tagTypes.academicFaculty,
 ];
