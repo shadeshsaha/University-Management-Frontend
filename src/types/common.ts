@@ -78,3 +78,12 @@ export interface IAcademicFaculty {
   updatedAt: string;
   __v: number;
 }
+
+export interface IAcademicDepartment {
+  id: string;
+  title: string;
+  academicFaculty: IAcademicFaculty;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
