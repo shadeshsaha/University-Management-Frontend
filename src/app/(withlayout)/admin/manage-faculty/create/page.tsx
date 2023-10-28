@@ -14,7 +14,7 @@ import { useAddFacultyWithFormDataMutation } from "@/redux/api/facultyApi";
 import { Button, Col, Row, message } from "antd";
 
 const CreateFacultyPage = () => {
-  const [addFacultyWithFormData] = useAddFacultyWithFormDataMutation();
+  const [addFacultyWithFormData] = useAddFacultyWithFormDataMutation(); // create faculty
 
   const adminOnSubmit = async (values: any) => {
     console.log("values: ", values);

@@ -1,11 +1,9 @@
 "use client";
-import {
-  acDepartmentOptions,
-  acSemesterOptions,
-  facultyOptions,
-  genderOptions,
-} from "@/constants/global";
+import { genderOptions } from "@/constants/global";
 import { Col, Row } from "antd";
+import ACDepartmentField from "../Forms/ACDepartmentField";
+import ACFacultyField from "../Forms/ACFacultyField";
+import ACSemesterField from "../Forms/ACSemesterField";
 import FormInput from "../Forms/FormInput";
 import FormSelectField from "../Forms/FormSelectField";
 import UploadImage from "../ui/UploadImage";
@@ -36,7 +34,6 @@ const StudentInfo = () => {
             label="First Name"
           />
         </Col>
-
         <Col
           className="gutter-row"
           span={6}
@@ -51,7 +48,6 @@ const StudentInfo = () => {
             label="Middle Name"
           />
         </Col>
-
         <Col
           className="gutter-row"
           span={6}
@@ -66,7 +62,6 @@ const StudentInfo = () => {
             label="Last Name"
           />
         </Col>
-
         <Col
           className="gutter-row"
           span={6}
@@ -81,7 +76,6 @@ const StudentInfo = () => {
             label="Password"
           />
         </Col>
-
         <Col
           className="gutter-row"
           span={8}
@@ -89,15 +83,11 @@ const StudentInfo = () => {
             marginBottom: "10px",
           }}
         >
-          <FormSelectField
-            size="large"
+          <ACDepartmentField
             name="student.academicDepartment"
-            options={acDepartmentOptions}
             label="Academic Department"
-            placeholder="Select"
           />
         </Col>
-
         <Col
           className="gutter-row"
           span={8}
@@ -105,15 +95,11 @@ const StudentInfo = () => {
             marginBottom: "10px",
           }}
         >
-          <FormSelectField
-            size="large"
+          <ACFacultyField
             name="student.academicFaculty"
-            options={facultyOptions}
             label="Academic Faculty"
-            placeholder="Select"
           />
         </Col>
-
         <Col
           className="gutter-row"
           span={8}
@@ -121,15 +107,11 @@ const StudentInfo = () => {
             marginBottom: "10px",
           }}
         >
-          <FormSelectField
-            size="large"
+          <ACSemesterField
             name="student.academicSemester"
-            options={acSemesterOptions}
             label="Academic Semester"
-            placeholder="Select"
           />
         </Col>
-
         <Col
           className="gutter-row"
           span={8}
@@ -145,7 +127,6 @@ const StudentInfo = () => {
             placeholder="Select"
           />
         </Col>
-
         <Col
           className="gutter-row"
           span={8}
@@ -153,7 +134,7 @@ const StudentInfo = () => {
             marginBottom: "10px",
           }}
         >
-          <UploadImage />
+          <UploadImage name="file" />
         </Col>
       </Row>
     </div>

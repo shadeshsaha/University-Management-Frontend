@@ -1,24 +1,21 @@
 "use client";
+import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UMTable from "@/components/ui/UMTable";
+import { useStudentsQuery } from "@/redux/api/studentApi";
+import { useDebounced } from "@/redux/hooks";
 import {
   DeleteOutlined,
   EditOutlined,
+  EyeOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-
-import ActionBar from "@/components/ui/ActionBar";
-import {
-  useAcademicSemestersQuery,
-  useDeleteAcademicSemesterMutation,
-} from "@/redux/api/academic/semesterApi";
-import { useDebounced } from "@/redux/hooks";
-import { Button, Input, message } from "antd";
+import { Button, Input } from "antd";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { useState } from "react";
 
-const ACSemesterPage = () => {
+const StudentPage = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -26,66 +23,44 @@ const ACSemesterPage = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [deleteAcademicSemester] = useDeleteAcademicSemesterMutation();
 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  // query["searchTerm"] = searchTerm;
 
-  const debouncedTerm = useDebounced({
+  const debouncedSearchTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
   });
 
-  if (!!debouncedTerm) {
-    query["searchTerm"] = debouncedTerm;
+  if (!!debouncedSearchTerm) {
+    query["searchTerm"] = debouncedSearchTerm;
   }
-  const { data, isLoading } = useAcademicSemestersQuery({ ...query });
-  console.log("data::: ", data);
+  console.log("query: ", query);
+  const { data, isLoading } = useStudentsQuery({ ...query });
+  console.log("data---> ", data);
 
-  const academicSemesters = data?.academicSemesters;
+  const students = data?.students;
   const meta = data?.meta;
-
-  const deleteHandler = async (id: string) => {
-    message.loading("Deleting.....");
-    try {
-      //   console.log(data);
-      const res = await deleteAcademicSemester(id);
-      if (!!res) {
-        message.success("Academic Semester Deleted successfully");
-      }
-    } catch (err: any) {
-      //   console.error(err.message);
-      message.error(err.message);
-    }
-  };
+  // console.log(students);
 
   const columns = [
     {
-      title: "Title",
-      dataIndex: "title",
-    },
-    {
-      title: "Code",
-      dataIndex: "code",
+      title: "Id",
+      dataIndex: "studentId",
       sorter: true,
     },
     {
-      title: "Start month",
-      dataIndex: "startMonth",
-      sorter: true,
+      title: "Name",
+      render: function (data: Record<string, string>) {
+        const fullName = `${data?.firstName} ${data?.middleName} ${data?.lastName}`;
+        return <>{fullName}</>;
+      },
     },
     {
-      title: "End month",
-      dataIndex: "endMonth",
-      sorter: true,
-    },
-    {
-      title: "Year",
-      dataIndex: "year",
-      sorter: true,
+      title: "Email",
+      dataIndex: "email",
     },
     {
       title: "Created at",
@@ -96,12 +71,26 @@ const ACSemesterPage = () => {
       sorter: true,
     },
     {
+      title: "Contact no.",
+      dataIndex: "contactNo",
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      sorter: true,
+    },
+    {
       title: "Action",
       dataIndex: "id",
       render: function (data: any) {
         return (
           <>
-            <Link href={`/admin/academic/semester/edit/${data?.id}`}>
+            <Link href={`/admin/manage-faculty/details/${data.id}`}>
+              <Button onClick={() => console.log(data)} type="primary">
+                <EyeOutlined />
+              </Button>
+            </Link>
+            <Link href={`/admin/manage-faculty/edit/${data.id}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -112,11 +101,7 @@ const ACSemesterPage = () => {
                 <EditOutlined />
               </Button>
             </Link>
-            <Button
-              onClick={() => deleteHandler(data?.id)}
-              type="primary"
-              danger
-            >
+            <Button onClick={() => console.log(data)} type="primary" danger>
               <DeleteOutlined />
             </Button>
           </>
@@ -124,7 +109,6 @@ const ACSemesterPage = () => {
       },
     },
   ];
-
   const onPaginationChange = (page: number, pageSize: number) => {
     console.log("Page:", page, "PageSize:", pageSize);
     setPage(page);
@@ -142,7 +126,6 @@ const ACSemesterPage = () => {
     setSortOrder("");
     setSearchTerm("");
   };
-
   return (
     <div>
       <UMBreadCrumb
@@ -153,28 +136,24 @@ const ACSemesterPage = () => {
           },
         ]}
       />
-
-      <ActionBar title="Academic Semester List">
+      <ActionBar title="Student List">
         <Input
-          type="text"
           size="large"
-          placeholder="Search..."
+          placeholder="Search"
+          onChange={(e) => setSearchTerm(e.target.value)}
           style={{
             width: "20%",
           }}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
         />
         <div>
-          <Link href="/admin/academic/semester/create">
+          <Link href="/admin/manage-student/create">
             <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (
             <Button
-              onClick={resetFilters}
-              type="primary"
               style={{ margin: "0px 5px" }}
+              type="primary"
+              onClick={resetFilters}
             >
               <ReloadOutlined />
             </Button>
@@ -185,7 +164,7 @@ const ACSemesterPage = () => {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={academicSemesters}
+        dataSource={students}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
@@ -197,4 +176,4 @@ const ACSemesterPage = () => {
   );
 };
 
-export default ACSemesterPage;
+export default StudentPage;

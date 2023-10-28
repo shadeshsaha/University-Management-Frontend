@@ -28,22 +28,17 @@ const CreateACSemesterPage = () => {
   const [addAcademicSemester] = useAddAcademicSemesterMutation();
 
   const onSubmit = async (data: any) => {
-    console.log("data: ", data);
+    console.log("data", data);
 
-    if (data?.title == "Autumn") {
-      data["code"] = "01";
-    } else if (data?.title == "Summer") {
-      data["code"] = "02";
-    } else {
-      data["code"] = "03";
-    }
+    if (data?.title == "Autumn") data["code"] = "01";
+    else if (data?.title == "Summer") data["code"] = "02";
+    else data["code"] = "03";
 
     data.year = parseInt(data.year);
 
     message.loading("Creating.....");
     try {
       const res = addAcademicSemester(data);
-      // console.log("res: ", res);
       if (!!res) {
         message.success("Academic Semester Created successfully");
       }

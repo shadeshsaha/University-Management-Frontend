@@ -42,6 +42,8 @@ const AdminPage = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
+
+  console.log("query: ", query);
   const { data, isLoading } = useAdminsQuery({ ...query }); // show admins
   console.log("data: ", data);
   const admins = data?.admins;
