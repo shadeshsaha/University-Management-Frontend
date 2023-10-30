@@ -54,9 +54,11 @@ const StepperForm = ({
 
   const methods = useForm({ defaultValues: savedValues });
   const watch = methods.watch();
+  // watch() function ta form a ja type korbo seta dhore rakhbe/watch korbe.
 
   useEffect(() => {
     setToLocalStorage(persistKey, JSON.stringify(watch));
+    // persistKey ta hocche "student-create-form" key ta.
   }, [watch, persistKey, methods]);
 
   const { handleSubmit, reset } = methods;
