@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 
 import ActionBar from "@/components/ui/ActionBar";
+import DeleteModal from "@/components/ui/DeleteModal";
 import {
   useAcademicDepartmentsQuery,
   useDeleteAcademicDepartmentMutation,
@@ -26,6 +27,9 @@ const ACDepartmentPage = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
+
   const [deleteAcademicDepartment] = useDeleteAcademicDepartmentMutation();
 
   query["limit"] = size;
@@ -48,17 +52,34 @@ const ACDepartmentPage = () => {
   const meta = data?.meta;
 
   const deleteHandler = async (id: string) => {
+    console.log("id: " + id);
     message.loading("Deleting.....");
     try {
       //   console.log(data);
       const res = await deleteAcademicDepartment(id);
+      console.log("res: " + res);
       if (res) {
-        message.success("Department Deleted successfully");
+        message.success("Academic Department Deleted successfully");
       }
     } catch (err: any) {
       //   console.error(err.message);
       message.error(err.message);
     }
+  };
+
+  // For Modal
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    deleteHandler(deleteId);
+    setIsModalOpen(false);
+    setDeleteId("");
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   const columns = [
@@ -98,7 +119,12 @@ const ACDepartmentPage = () => {
               </Button>
             </Link>
             <Button
-              onClick={() => deleteHandler(data?.id)}
+              style={{ margin: "0px 5px", padding: "0px 10px" }}
+              onClick={() => {
+                console.log("gg", data);
+                showModal();
+                setDeleteId(data?.id);
+              }}
               type="primary"
               danger
             >
@@ -177,6 +203,15 @@ const ACDepartmentPage = () => {
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
         showPagination={true}
+      />
+
+      {/* Delete confirmation modal  */}
+      <DeleteModal
+        title="Are you sure you want to delete this admin? "
+        subTitle="Remember once it will be deleted, you will never get it back. "
+        isModalOpen={isModalOpen}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
       />
     </div>
   );

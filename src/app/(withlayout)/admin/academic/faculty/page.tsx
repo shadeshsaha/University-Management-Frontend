@@ -51,10 +51,12 @@ const ACFacultyPage = () => {
   const meta = data?.meta;
 
   const deleteHandler = async (id: string) => {
+    console.log("id: ", id);
     message.loading("Deleting.....");
     try {
-      //   console.log(data);
+      // console.log(data);
       const res = await deleteAcademicFaculty(id);
+      console.log("res: ", res);
       if (res) {
         message.success("Faculty Deleted successfully");
       }
